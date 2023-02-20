@@ -30,14 +30,14 @@ public class ApexMovement : MonoBehaviour
     private float Jumps = 2f;
     public float InAirVelFriction;
     public float WallJump = 15;
-    private bool isWallrunning;
-    private Vector3 ForwardDirection;
-    public float WallRunSpeed;
-    public Vector3 wallNormal;
-    public float WallJumpOffForce;
-    private Vector3 lastWall;
-    private float WallRunTimer;
-    public float MaxWallRunTime;
+    //private bool isWallrunning;
+    //private Vector3 ForwardDirection;
+    //public float WallRunSpeed;
+    //private Vector3 wallNormal;
+    //public float WallJumpOffForce;
+    //private Vector3 lastWall;
+    //private float WallRunTimer;
+    //public float MaxWallRunTime;
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -49,10 +49,10 @@ public class ApexMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         MouseRotation();
         CheckGround();
-        CheckWallRun();
-        if(isWallrunning) WallRunMovement();
-        if(!isClimbing && !isWallrunning) Vel.y += Gravity * Time.deltaTime;
-        if (!isGrounded && Vel.y > 0 && !isClimbing && !isWallrunning) Vel.y += Gravity * AdditionalGravity * Time.deltaTime;
+        //CheckWallRun();
+        //if(isWallrunning) WallRunMovement();
+        if(!isClimbing) Vel.y += Gravity * Time.deltaTime;
+        if (!isGrounded && Vel.y > 0 && !isClimbing) Vel.y += Gravity * AdditionalGravity * Time.deltaTime;
         if (isGrounded && Vel.y < -2) Vel.y = -2f;
         //Velocity Friction
         {
@@ -82,14 +82,14 @@ public class ApexMovement : MonoBehaviour
                 Jumps = 1f;
                 ClimbTimer = 1.25f;
             }
-            else if (isWallrunning)
-            {
-                Vel.y = Mathf.Sqrt(JumpHeight * -1f * Gravity);
-                ExitWallRun();
-                Vel += (transform.forward * 0.2f + wallNormal) * WallJumpOffForce;
-                Jumps = 1f;
+            //else if (isWallrunning)
+            //{
+                //Vel.y = Mathf.Sqrt(JumpHeight * -1f * Gravity);
+                //ExitWallRun();
+                //Vel += (transform.forward * 0.2f + wallNormal) * WallJumpOffForce;
+                //Jumps = 1f;
                 
-            }
+            //}
             else
             {
                 Vel.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -97,7 +97,7 @@ public class ApexMovement : MonoBehaviour
                 ClimbTimer = 1.25f;
             }
 
-            WallRunTimer = MaxWallRunTime;
+            //WallRunTimer = MaxWallRunTime;
         }
         
         
@@ -119,7 +119,7 @@ public class ApexMovement : MonoBehaviour
         {
             isClimbing = false;
             ClimbTimer = 1.25f;
-            WallRunTimer = MaxWallRunTime;
+            //WallRunTimer = MaxWallRunTime;
         }
     }
     
@@ -153,48 +153,48 @@ public class ApexMovement : MonoBehaviour
             isClimbing = false;
         }
     }
-    void CheckWallRun()
-    {
-        RaycastHit rightWallHit;
-        RaycastHit leftWallHit;
-        bool onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, WallMask);
-        bool onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, WallMask);
+    //void CheckWallRun()
+    //{
+        //RaycastHit rightWallHit;
+        //RaycastHit leftWallHit;
+        //bool onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, WallMask);
+        //bool onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, WallMask);
         
-        if ((onRightWall || onLeftWall) && !isWallrunning)
-        {
-            wallNormal = onRightWall ? rightWallHit.normal : leftWallHit.normal;
-            WallRun();
-        }
-        else if (!onRightWall && !onLeftWall && isWallrunning || (WallRunTimer <= 0f && isWallrunning))
-        {
-            ExitWallRun();
-        }
-    }
-    void WallRun()
-    {
-        isWallrunning = true;
-        Jumps = 1;
-        Vel.y = 0f;
+        //if ((onRightWall || onLeftWall) && !isWallrunning)
+        //{
+           // wallNormal = onRightWall ? rightWallHit.normal : leftWallHit.normal;
+           // WallRun();
+        //}
+        //else if (!onRightWall && !onLeftWall && isWallrunning || (WallRunTimer <= 0f && isWallrunning))
+        //{
+        //    ExitWallRun();
+        //}
+    //}
+    //void WallRun()
+    //{
+        //isWallrunning = true;
+        //Jumps = 1;
+        //Vel.y = 0f;
         
 
-        ForwardDirection = Vector3.Cross(wallNormal, Vector3.up);
+        //ForwardDirection = Vector3.Cross(wallNormal, Vector3.up);
 
-        if (Vector3.Dot(ForwardDirection, transform.forward) < 0)
-        {
-            ForwardDirection = -ForwardDirection;
-        }
-    }
-    void WallRunMovement()
-    {
-        WallRunTimer -= Time.deltaTime;
-        Vel += ForwardDirection * WallRunSpeed * Input.GetAxisRaw("Vertical") * Time.deltaTime;
-    }
-    void ExitWallRun()
-    {
-        isWallrunning = false;
-        lastWall = wallNormal;
-        Vel *= 1.1f;
-    }
+        //if (Vector3.Dot(ForwardDirection, transform.forward) < 0)
+        //{
+          //  ForwardDirection = -ForwardDirection;
+        //}
+    //}
+    //void WallRunMovement()
+    //{
+        //WallRunTimer -= Time.deltaTime;
+        //Vel += ForwardDirection * WallRunSpeed * Input.GetAxisRaw("Vertical") * Time.deltaTime;
+    //}
+    //void ExitWallRun()
+   // {
+        //isWallrunning = false;
+        //lastWall = wallNormal;
+        //Vel *= 1.1f;
+    //}
     void ClimbMovement()
     {
         Vector3 pos;
