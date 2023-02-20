@@ -6,3 +6,8 @@ Some parts are from:
 https://github.com/Harald234/Titanfall-Movement-Scripts
 
 Feel free to use this movement script anywhere.
+
+
+#To-do
+- Cleanup the code
+- Add WallRunning
