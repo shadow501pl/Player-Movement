@@ -11,4 +11,4 @@ You can add wallrunning by uncommenting all the lines.
 
 # To-do
 - Cleanup the code
-- Add WallRunning
+- Make wallrunning less janky
