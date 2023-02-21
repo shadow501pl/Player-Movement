@@ -7,7 +7,8 @@ https://github.com/Harald234/Titanfall-Movement-Scripts
 
 Feel free to use this movement script anywhere.
 
+You can add wallrunning by uncommenting all the lines.
 
-#To-do
+# To-do
 - Cleanup the code
 - Add WallRunning
