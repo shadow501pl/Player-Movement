@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ApexMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private CharacterController _controller;
     private bool isGrounded;
