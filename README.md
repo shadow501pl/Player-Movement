@@ -1,6 +1,6 @@
 # Player-Movement
 
-This is a remake of the movement in the Titanfall Series made by Respawn Entertainment. Currently there is only Apex legends movement as the wallrunning is too janky.
+This is a PlayerMovement script to have most of the features of the movement found in Titanfall.
 
 Some parts are from:
 https://github.com/Harald234/Titanfall-Movement-Scripts
