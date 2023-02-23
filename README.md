@@ -1,4 +1,4 @@
-# Titanfall-Movement
+# Player-Movement
 
 This is a remake of the movement in the Titanfall Series made by Respawn Entertainment. Currently there is only Apex legends movement as the wallrunning is too janky.
 
